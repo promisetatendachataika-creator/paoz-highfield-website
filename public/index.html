@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a7a3d">
+<link rel="icon" href="images/paoz-logo.png">
+<meta property="og:title" content="PAOZ Highfield Assembly">
+<meta property="og:description" content="Pentecostal Assemblies of Zimbabwe, Highfield Assembly. Sundays 09:00 at 2407 Egypt, Highfield, Harare.">
+<meta property="og:image" content="images/worship.jpg">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>PAOZ Highfield Assembly</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Pentecostal Assemblies of Zimbabwe, Highfield Assembly. 2407 Egypt, Highfield, Harare. Sunday service 09:00 to 13:00.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: floating white pill nav over a canvas-drawn green "bowl" glow; home = hero → pinned statement that floods green → deep-green split panel with photo → white content bands. Single light theme by design. */
+:root{
+  --bg:#ffffff; --surface:#f3f8f4; --ink:#0b2a1a; --ink2:#1e3d2b; --muted:#4f6357; --line:#d8e6dc;
+  --royal:#0a7a3d; --royal-ink:#ffffff; --flame:#0a7a3d; --flame-soft:#e3f3e8; --gold:#f5d313; --red:#e2231a;
+  --hl:#0a8f45; --dot:#f5d313; --panel:#06301b; --panel-line:rgba(255,255,255,.12);
+  --gut:clamp(20px,5.7vw,82px); --ease:cubic-bezier(.22,.7,.2,1);
+  --display:"Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body:"Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{background:#fff}
+body{background:#fff;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:500;letter-spacing:-.035em}
+h2{font-size:clamp(1.6rem,3.3vw,2.4rem);font-weight:500;letter-spacing:-.03em}
+h3{font-size:1.2rem;font-weight:600;letter-spacing:-.01em}
+p{margin:0;max-width:65ch}
+/* Inter Tight for display, UI and the animated hero; Open Sans for reading text */
+.nav,.pbtn,.btn,.eyebrow,.cells,.trust,#h1,#stmt,#h2,#row h3,h4,.next-card .when,.lead-sub,.dept h3,.ph-initial,.ed-pic,.avatar,.menu-btn{font-family:var(--display)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--flame)}
+.muted{color:var(--muted)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+
+/* atmosphere */
+.atmo{position:fixed;inset:0;z-index:0;pointer-events:none;background:#fff}
+.atmo canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+main,footer{position:relative;z-index:1}
+
+/* pill nav */
+.nav{position:fixed;z-index:50;top:calc(20px + env(safe-area-inset-top,0px));left:max(var(--gut),env(safe-area-inset-left,0px));right:max(var(--gut),env(safe-area-inset-right,0px));height:60px;border-radius:999px;background:#fff;color:var(--ink);display:flex;align-items:center;padding:0 10px 0 12px;box-shadow:0 1px 0 rgba(11,42,26,.04),0 10px 30px -18px rgba(11,42,26,.3);opacity:0;transform:translateY(-8px);animation:navin .9s var(--ease) .15s forwards}
+@keyframes navin{to{opacity:1;transform:none}}
+.nav .brand{display:flex;align-items:center;gap:9px;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.nav .brand img{width:40px;height:40px;object-fit:contain}
+.navlinks{position:absolute;left:50%;transform:translateX(-50%)}
+.navlinks ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.navlinks a{font-size:14px;font-weight:500;letter-spacing:-.005em;opacity:1;text-decoration:none;transition:opacity .2s;white-space:nowrap}
+.navlinks a:hover{opacity:.6}
+.navlinks a[aria-current="page"]{color:var(--hl);opacity:1}
+.nav .right{margin-left:auto;display:flex;align-items:center}
+.nav .login{font-size:14px;font-weight:500;padding:0 14px;text-decoration:none;white-space:nowrap;transition:padding .35s var(--ease)}
+.navcta{flex:none;width:42px;height:42px;overflow:hidden;border-radius:999px;margin-left:-42px;transform:scale(0);transform-origin:100% 50%;transition:transform .35s var(--ease),width .65s var(--ease) .22s,margin .35s var(--ease)}
+.navcta .pbtn{width:150px}
+.navcta .lbl{opacity:0;transition:opacity .4s .45s}
+#nav.on .navcta{width:150px;margin-left:16px;transform:scale(1)}
+#nav.on .navcta .lbl{opacity:1}
+#nav.on .login{padding-right:0}
+.menu-btn{display:none;background:var(--surface);border:0;color:var(--ink);border-radius:999px;height:42px;padding:0 16px;font:600 14px var(--body);cursor:pointer;margin-left:8px}
+.menu-btn{display:none!important}
+@media (max-width:1250px){
+  .navlinks{position:static;transform:none;margin-left:auto}
+  .navlinks ul{gap:16px}
+  .navlinks a{font-size:13.5px}
+  .nav .login{display:none}
+}
+@media (max-width:1100px){
+  .nav .brand span{display:none}
+}
+@media (max-width:860px){
+  .nav .brand span{display:inline}
+  .navlinks{position:absolute;left:0;right:0;top:calc(100% + 8px);margin:0;background:#fff;border-radius:999px;padding:4px;box-shadow:0 10px 30px -18px rgba(11,42,26,.35);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks ul{gap:2px;flex-wrap:nowrap}
+  .navlinks a{display:block;padding:8px 13px;border-radius:999px;font-size:13.5px}
+  .navlinks a[aria-current="page"]{background:var(--flame-soft)}
+  .page:not([data-page="home"]){padding-top:calc(150px + env(safe-area-inset-top,0px))}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font:600 .95rem var(--body);text-decoration:none;border:2px solid transparent;cursor:pointer}
+.btn-flame{background:var(--ink);color:#fff}
+.btn-flame:hover{background:var(--royal)}
+.btn-ghost{border-color:currentColor;background:transparent;color:inherit}
+.btn-wa{background:#128c4a;color:#fff}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.pbtn{position:relative;display:inline-flex;align-items:center;height:42px;padding:0 46px 0 18px;border-radius:999px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;text-decoration:none}
+.pbtn .dot{position:absolute;right:16px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--dot);box-shadow:0 0 10px rgba(245,211,19,.75);display:grid;place-items:center;transition:width .45s var(--ease),height .45s var(--ease),margin .45s var(--ease),right .45s var(--ease),box-shadow .45s var(--ease)}
+.pbtn .dot svg{width:12px;height:12px;opacity:0;transform:translateX(-4px);transition:opacity .3s .05s,transform .3s .05s}
+.pbtn:hover .dot,.pbtn:focus-visible .dot{width:32px;height:32px;margin-top:-16px;right:5px;box-shadow:none}
+.pbtn:hover .dot svg,.pbtn:focus-visible .dot svg{opacity:1;transform:none}
+.pbtn.lg{height:62px;padding:0 62px 0 28px;font-size:17px}
+.pbtn.lg .dot{width:14px;height:14px;margin-top:-7px;right:24px}
+.pbtn.lg .dot svg{width:16px;height:16px}
+.pbtn.lg:hover .dot,.pbtn.lg:focus-visible .dot{width:48px;height:48px;margin-top:-24px;right:7px}
+
+/* hero */
+.hero2{position:relative;height:100vh;min-height:640px}
+#h1{position:absolute;top:21.5vh;left:var(--gut);font-weight:400;font-size:clamp(34px,4.65vw,70px);line-height:1.03;letter-spacing:-.035em;white-space:nowrap;color:var(--ink)}
+.trust{position:absolute;top:58vh;left:var(--gut);font-size:clamp(15px,1.28vw,19px);letter-spacing:-.015em;color:var(--ink2);max-width:22em;line-height:1.4}
+.hero2 .cta{position:absolute;bottom:7.5vh;left:var(--gut)}
+.cells{position:absolute;right:0;width:50%;top:55vh;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr)}
+.cells a{position:relative;display:grid;place-content:center;justify-items:center;gap:5px;text-align:center;color:#2b4a38;text-decoration:none;padding:10px 6px;transition:background .3s}
+.cells a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(rgba(11,42,26,.09),rgba(11,42,26,.05))}
+.cells a:nth-child(n+5)::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(11,42,26,.07)}
+.cells a:hover{background:rgba(255,255,255,.55)}
+.cells svg{height:22px;width:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cells b{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.cells span{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.fade-up{opacity:0;transform:translateY(14px)}
+body.ready .fade-up{animation:fu .9s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes fu{to{opacity:1;transform:none}}
+
+/* statement */
+.statement{position:relative;height:306vh;margin-top:-31vh;pointer-events:none}
+.pin{position:sticky;top:0;height:100vh}
+#stmt{position:absolute;top:41.5vh;left:0;right:0;margin:0 auto;max-width:none;text-align:center;font-weight:400;font-size:clamp(20px,2.8vw,42px);line-height:1.16;letter-spacing:-.03em;color:var(--ink);white-space:nowrap;will-change:transform}
+
+/* split */
+.split{position:relative;z-index:2;background:var(--panel);color:#fff;min-height:100vh;display:grid;grid-template-columns:58.3% 41.7%}
+.split .l{position:relative;padding-left:var(--gut);padding-bottom:10vh;min-width:0}
+.split .l::before{content:"";position:absolute;left:var(--gut);top:0;bottom:0;width:1px;background:var(--panel-line)}
+#h2{font-weight:400;font-size:clamp(32px,3.15vw,48px);line-height:1.08;letter-spacing:-.03em;padding:21vh 0 0 6.2vw;color:#fff}
+#row{margin-top:6.4vh;border-top:1px solid var(--panel-line);display:grid;grid-template-columns:1fr 1.05fr;gap:24px;padding:3vh 6vw 0 6.2vw;opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+#row.on{opacity:1;transform:none}
+#row h3{font-weight:400;font-size:clamp(17px,1.4vw,21px)}
+#row p{font-size:clamp(13px,1.1vw,16px);line-height:1.38;color:rgba(255,255,255,.55);max-width:20em}
+#row p b{color:#fff;font-weight:500}
+#row a{color:var(--gold);font-weight:500;font-size:clamp(13px,1.1vw,16px);display:inline-block;margin-top:12px}
+.split .r{position:relative;overflow:hidden;min-height:60vh}
+#ship{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 60%;transform:scale(1.08)}
+
+/* content under the split, and the other pages */
+.home-rest{position:relative;z-index:2;background:#fff}
+.page:not([data-page="home"]){padding-top:calc(96px + env(safe-area-inset-top,0px))}
+.weekwrap{display:grid;gap:18px;grid-template-columns:minmax(0,2fr) minmax(0,1fr);align-items:start}
+@media (max-width:820px){.weekwrap{grid-template-columns:minmax(0,1fr)}}
+.pastor{grid-template-columns:76px 1fr}
+.pastor .avatar{width:76px;height:76px;font-size:1.5rem}
+.pastor.lead{background:var(--panel);color:#fff;border-color:var(--panel)}
+.pastor.lead .muted{color:rgba(255,255,255,.7)}
+.pastor.lead .eyebrow{color:var(--gold)}
+.pastor.lead .avatar{background:var(--gold);color:var(--panel)}
+.invite-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:center}
+.invite-photo{margin:0;border-radius:24px;overflow:hidden;aspect-ratio:3/4;max-width:440px;width:100%;box-shadow:0 30px 60px -30px rgba(6,48,27,.45)}
+.invite-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.invite-copy{display:grid;gap:14px;min-width:0}
+.invite-copy h2{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:400;letter-spacing:-.035em;line-height:1.04}
+@media (max-width:720px){.invite-grid{grid-template-columns:minmax(0,1fr)}.invite-photo{max-width:none;aspect-ratio:4/5}}
+.depts{display:grid;gap:clamp(20px,3vw,40px) 28px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.dept{display:grid;gap:12px;margin:0}
+.dept .pic{position:relative;aspect-ratio:3/2;max-width:100%;border-radius:var(--radius);overflow:hidden;background:linear-gradient(140deg,#0a7a3d,#06301b);display:grid;place-items:center}
+.dept .pic img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.dept:hover .pic img.ph{transform:scale(1.04)}
+.dept .pic svg{width:64px;height:64px;fill:none;stroke:rgba(255,255,255,.9);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.dept .pic::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(3,25,13,.35));pointer-events:none}
+.dept .badge{position:absolute;left:12px;bottom:12px;width:48px;height:48px;z-index:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.dept figcaption{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.dept h3{font-weight:500;font-size:1.25rem}
+.dept .sub{color:var(--muted);font-size:.98rem}
+.dept .lead-by{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap}
+.lead-head{text-align:center;display:grid;gap:8px;justify-items:center;margin-bottom:12px}
+.lead-head p{margin:0 auto}
+.lead-sub{text-align:center;font-size:1.5rem;font-weight:500;letter-spacing:-.02em;margin:40px 0 22px}
+.senior-grid,.ed-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));max-width:900px;margin:0 auto}
+.senior,.ed{background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 8px 24px -18px rgba(6,48,27,.35);text-align:center}
+.senior-pic{position:relative;aspect-ratio:6/5;max-width:100%;background:linear-gradient(150deg,#e3f3e8,#c9e8d3);display:grid;place-items:center}
+.senior-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.senior-pic .ph-initial{font-size:4rem;font-weight:500;color:#0a7a3d;letter-spacing:-.04em}
+.senior-pic .ph-logo{position:absolute;left:12px;bottom:12px;width:40px;height:40px;object-fit:contain}
+.senior-txt{padding:14px 16px 18px;display:grid;gap:2px}
+.senior h4,.ed h4{margin:0;font-size:1rem;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.senior-txt div,.ed-role{font-size:.82rem;color:var(--muted)}
+.ed{padding:18px 14px 20px;display:grid;justify-items:center;gap:6px}
+.ed-pic{width:72px;height:72px;border-radius:50%;overflow:hidden;background:#e3f3e8;color:#0a7a3d;display:grid;place-items:center;font-size:1.6rem;font-weight:500;margin-bottom:6px}
+.ed-pic img{width:100%;height:100%;object-fit:cover}
+.history-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.bank{display:grid;gap:10px;margin-top:4px}
+.bank > div{display:grid;gap:1px}
+.bank span{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bank b{font-weight:600}
+.bank .acct{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.values-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;margin-top:48px}
+.values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.values li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px 14px 40px;font-family:var(--display);font-weight:500;font-size:1.05rem;letter-spacing:-.01em}
+.values li::before{content:"";position:absolute;left:16px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--royal);box-shadow:0 0 0 3px var(--flame-soft)}
+.values li:nth-child(3n+2)::before{background:var(--red)}
+.values li:nth-child(3n)::before{background:var(--gold)}
+.banner-photo{margin:0;border-radius:var(--radius);overflow:hidden;max-width:340px;justify-self:center;box-shadow:0 24px 50px -28px rgba(6,48,27,.5)}
+.banner-photo img{display:block;width:100%;height:auto}
+@media (max-width:760px){.values-wrap{grid-template-columns:minmax(0,1fr)}.values{grid-template-columns:minmax(0,1fr)}}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chips:empty{display:none}
+.chip{font:500 14px var(--display);padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--royal)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip-link{font:600 13px var(--display);padding:7px 13px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--ink);background:var(--bg)}
+.chip-link:hover{border-color:var(--royal);color:var(--royal)}
+.chip-link.solid{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sermon-cover{margin:-22px -22px 8px;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;max-width:none}
+.sermon-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.event.featured{border-color:var(--royal);box-shadow:0 0 0 2px var(--flame-soft)}
+.next-card{background:var(--panel);color:#fff;border-radius:var(--radius);padding:22px;display:grid;gap:4px}
+.next-card .eyebrow{color:var(--gold)}
+.next-card .when{font-size:1.8rem;font-weight:500;letter-spacing:-.03em}
+footer .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+footer .mark{width:46px;height:46px;flex:none;background:#fff;border-radius:50%;padding:4px;object-fit:contain}
+footer .brand b{font-size:1.05rem;display:block;line-height:1.1}
+footer .brand small{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+
+@media (max-width:820px){
+  .nav{height:54px;top:calc(12px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));padding:0 6px 0 8px}
+  .nav .brand{font-size:14.5px}
+  .nav .brand img{width:34px;height:34px}
+  .nav .login{display:none}
+  #nav.on .navcta{margin-left:8px}
+}
+@media (max-width:460px){
+  #nav.on .brand span{display:none}
+  .navcta .pbtn,#nav.on .navcta{width:132px}
+  .hero2{height:auto;min-height:0;display:flex;flex-direction:column;gap:22px;padding-block:calc(170px + env(safe-area-inset-top,0px)) 48px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  #h1,.trust,.hero2 .cta,.cells{position:static}
+  #h1{font-size:9vw;white-space:normal}
+  .cells{width:auto;grid-template-columns:1fr 1fr;grid-template-rows:none;margin-top:8px;border-bottom:1px solid rgba(11,42,26,.07)}
+  .cells a{padding:16px 6px}
+  .cells a::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(11,42,26,.07)}
+  .cells a:nth-child(odd)::before{display:none}
+  .statement{margin-top:0}
+  #stmt{white-space:normal;font-size:23px;max-width:15em;left:20px;right:20px}
+  #stmt br{display:none}
+  .split{grid-template-columns:1fr;grid-template-rows:auto 70vh}
+  #h2{padding:16vh 6vw 0 6vw}
+  #row{grid-template-columns:1fr;padding:3vh 6vw 6vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .fade-up{opacity:1;transform:none}
+  body.ready .fade-up{animation:none}
+  .nav{animation:none;opacity:1;transform:none}
+}
+
+/* sections */
+section.band{padding-block:56px}
+.band-alt{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:grid;gap:8px;margin-bottom:28px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid > *{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:grid;gap:8px;align-content:start}
+.band-alt .card{background:var(--bg)}
+
+/* weekly schedule */
+.week{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.week .item{display:grid;grid-template-columns:120px 150px 1fr;gap:16px;padding:16px 20px;border-top:1px solid var(--line);align-items:baseline}
+.week .item:first-child{border-top:0}
+.week .day{font-family:var(--display);font-weight:700}
+.week .time{font-variant-numeric:tabular-nums;font-weight:600;color:var(--flame)}
+.week .item.is-next{background:var(--flame-soft)}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--flame);color:#fff;border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+@media (max-width:620px){.week .item{grid-template-columns:1fr;gap:2px}}
+
+/* photo placeholders */
+.photo{aspect-ratio:4/3;max-width:100%;border-radius:var(--radius);border:2px dashed var(--line);display:grid;place-items:center;text-align:center;padding:16px;color:var(--muted);font-size:.88rem;background:repeating-linear-gradient(135deg,transparent 0 12px,color-mix(in srgb,var(--line) 45%,transparent) 12px 13px)}
+.shot{margin:0;display:grid;gap:8px}
+.shot button{all:unset;cursor:zoom-in;display:block;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;max-width:100%;background:var(--surface)}
+.shot button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.shot button:hover img{transform:scale(1.04)}
+.shot figcaption{font-size:.88rem;color:var(--muted)}
+.gallery{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.gallery .wide{grid-column:span 2}
+@media (max-width:600px){.gallery .wide{grid-column:auto}}
+.feature{border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;max-width:100%}
+.feature img{width:100%;height:100%;object-fit:cover;display:block}
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);max-height:92vh}
+dialog.lb::backdrop{background:rgba(3,20,10,.88)}
+dialog.lb img{max-width:100%;max-height:82vh;display:block;border-radius:10px;margin:0 auto}
+dialog.lb p{color:#fff;text-align:center;margin:10px auto 0}
+dialog.lb .x{position:absolute;top:8px;right:8px;background:#fff;color:#0a7a3d;border:0;border-radius:999px;padding:6px 14px;font:700 .9rem var(--body);cursor:pointer}
+.photo strong{display:block;color:var(--ink);font-family:var(--display);font-size:1rem}
+
+/* people */
+.person{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--royal);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.1rem}
+.phone{font-variant-numeric:tabular-nums;font-weight:700;font-size:1.05rem;user-select:all}
+.copy{background:none;border:1px solid var(--line);border-radius:8px;padding:3px 9px;font:600 .78rem var(--body);color:var(--muted);cursor:pointer;margin-left:6px}
+
+/* forms */
+form{display:grid;gap:14px}
+label{font-weight:600;font-size:.92rem;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:110px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.radio{display:flex;gap:18px;flex-wrap:wrap;font-weight:500}
+.radio label{display:flex;gap:8px;align-items:center;font-weight:500}
+.radio input{width:auto}
+.note{font-size:.85rem;color:var(--muted)}
+.status{font-weight:600;color:var(--flame)}
+
+details{border-top:1px solid var(--line);padding-block:14px}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;font-family:var(--display);font-size:1.05rem}
+details p{margin-top:8px}
+
+.todo{background:var(--flame-soft);border-radius:var(--radius);padding:16px 18px;font-size:.92rem}
+.todo b{color:var(--flame)}
+
+footer{background:var(--royal);color:var(--royal-ink);padding-block:40px 32px;margin-top:0}
+footer .grid{gap:28px}
+footer a{opacity:.9}
+footer .fine{border-top:1px solid rgba(255,255,255,.18);margin-top:28px;padding-top:16px;font-size:.82rem;opacity:.75}
+
+</style>
+
+</head>
+<body>
+<div class="atmo" aria-hidden="true"><canvas id="bg" width="96" height="60"></canvas></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#home" aria-label="PAOZ Highfield Assembly home">
+    <img src="images/paoz-logo.png" alt="">
+    <span>PAOZ Highfield Assembly</span>
+  </a>
+  <nav class="navlinks" id="mainNav" aria-label="Main">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#sermons">Sermons</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#ministries">Ministries</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#give">Give</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="right">
+    <a class="login" href="https://www.facebook.com/share/1J8MhRu3iD/" target="_blank" rel="noopener">Watch live</a>
+    <div class="navcta"><a class="pbtn" href="#visit"><span class="lbl">Plan a visit</span><span class="dot"><svg viewBox="0 0 12 12"><path d="M4.5 2.5 8 6l-3.5 3.5" stroke="#0b2a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mainNav">Menu</button>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<div class="page" data-page="home">
+  <section class="hero2" id="hero">
+    <h1 id="h1">Welcome home to <span class="hl">Highfield</span><br>a family on fire for Jesus</h1>
+    <p class="trust fade-up" style="--d:1.15s">Pentecostal Assemblies of Zimbabwe. Sundays 09:00 at 2407 Egypt, Highfield, Harare.</p>
+    <div class="cta fade-up" style="--d:1.3s">
+      <a class="pbtn lg" href="#visit">Plan your visit<span class="dot"><svg viewBox="0 0 12 12"><path d="M4.5 2.5 8 6l-3.5 3.5" stroke="#0b2a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
+    <div class="cells">
+      <a class="fade-up" style="--d:1.25s" href="#visit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><b>Sunday</b><span>09:00 – 13:00</span></a>
+      <a class="fade-up" style="--d:1.32s" href="#visit"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M12 7v6M9 10h6"/></svg><b>Bible study</b><span>Sun 10:00</span></a>
+      <a class="fade-up" style="--d:1.39s" href="#ministries"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><b>Cell groups</b><span>Midweek, in homes</span></a>
+      <a class="fade-up" style="--d:1.46s" href="#ministries"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><b>Women</b><span>Thursdays</span></a>
+      <a class="fade-up" style="--d:1.42s" href="#ministries"><svg viewBox="0 0 24 24"><path d="M12 3c2 4 6 5 6 10a6 6 0 0 1-12 0c0-3 2-4.5 3-6 0 2 1 3 2 3.5C10.5 8 12 6 12 3z"/></svg><b>Youth</b><span>Sat 14:00</span></a>
+      <a class="fade-up" style="--d:1.49s" href="https://www.facebook.com/share/1J8MhRu3iD/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg><b>Watch live</b><span>On Facebook</span></a>
+      <a class="fade-up" style="--d:1.56s" href="#contact"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg><b>Prayer</b><span>Send a request</span></a>
+      <a class="fade-up" style="--d:1.63s" href="#give"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="11" rx="1"/><path d="M12 9v11M3 13h18M12 9C10 5 6 5 7 8s5 1 5 1 4 2 5-1-3-3-5 1"/></svg><b>Give</b><span>Tithes &amp; offerings</span></a>
+    </div>
+  </section>
+
+  <section class="statement" id="statement" aria-label="About Highfield Assembly">
+    <div class="pin">
+      <p id="stmt">Highfield Assembly is a church family<br> that worships every Sunday, gathers in homes midweek,<br> raises up its youth, prays together, and serves<br> our neighbours with the love of Jesus Christ</p>
+    </div>
+  </section>
+
+  <section class="split" id="split">
+    <div class="l">
+      <h2 id="h2">Come as you are,<br>leave with a family</h2>
+      <div id="row">
+        <h3>Sunday at Highfield</h3>
+        <div>
+          <p><b>09:00 to 13:00, every Sunday.</b> Praise and worship, the Word, and prayer at 2407 Egypt, Highfield. Bible study runs from 10:00 to 11:00.</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=2407+Egypt+Highfield+Harare+Zimbabwe" target="_blank" rel="noopener">Get directions →</a>
+        </div>
+      </div>
+    </div>
+    <div class="r"><img id="ship" src="images/worship.jpg" alt="Members of Highfield Assembly standing and clapping in worship"></div>
+  </section>
+
+  <div class="home-rest">
+    <section class="band">
+      <div class="wrap">
+        <div class="head"><div class="eyebrow">Every week</div><h2>When we meet</h2></div>
+        <div class="weekwrap" id="weekWrap">
+          <div><div class="week" id="weekList"></div>
+            <p class="note" style="margin-top:12px">Cell groups meet midweek in members' homes across Highfield. Ask an elder to join the one nearest you.</p></div>
+          <div class="next-card" aria-live="polite">
+            <div class="eyebrow">Next gathering</div>
+            <div class="when" id="nextWhen">Sunday 09:00</div>
+            <div id="nextWhat">Main Service</div>
+            <a style="margin-top:10px;color:var(--gold);font-weight:600" href="#visit">Plan your visit →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="wrap grid">
+        <div class="card">
+          <div class="eyebrow">Live on Sundays</div>
+          <h3>Watch the service on Facebook</h3>
+          <p class="muted">When we stream, it goes out on our Facebook page, PAOZ Highfield Assembly.</p>
+          <div><a class="btn btn-flame" href="https://www.facebook.com/share/1J8MhRu3iD/" target="_blank" rel="noopener">Open our Facebook page</a></div>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Welcome</div>
+          <h3>You belong here</h3>
+          <p class="muted">Whether you have been in church all your life or this is your first time, you are welcome. Come as you are and meet a church family that loves Jesus and loves Highfield.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow">Talk to us</div>
+          <h3>Need prayer?</h3>
+          <p class="muted">Send a prayer request to our elders. Private requests are seen only by the pastoral team.</p>
+          <div><a class="btn btn-ghost" href="#contact">Send a prayer request</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band invite">
+      <div class="wrap invite-grid">
+        <figure class="invite-photo"><img src="images/join-us.jpg" alt="A young member of Highfield Assembly in a denim jacket and tie, standing outside" loading="lazy"></figure>
+        <div class="invite-copy">
+          <div class="eyebrow">You're invited</div>
+          <h2>What's stopping you from joining us?</h2>
+          <p class="muted">Sundays from 09:00 at 2407 Egypt, Highfield. Youth meet every Saturday from 14:00. Come as you are.</p>
+          <div class="row" style="margin-top:8px">
+            <a class="pbtn lg" href="#visit">Plan your visit<span class="dot"><svg viewBox="0 0 12 12"><path d="M4.5 2.5 8 6l-3.5 3.5" stroke="#0b2a1a" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt">
+      <div class="wrap">
+      <div class="head"><div class="eyebrow">Serve with us</div><h2>Serving departments</h2>
+        <p class="muted">Every Sunday runs on volunteers. Find a team where your gifts fit.</p></div>
+      <div class="depts" id="deptsHome"></div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="head"><div class="eyebrow">Highfield Assembly in pictures</div><h2>Our church family</h2></div>
+        <div class="grid" id="homeGallery"></div>
+        <div class="row" style="margin-top:22px"><a class="btn btn-flame" href="#gallery">See the full gallery</a></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- I'M NEW -->
+<div class="page" data-page="visit" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Plan your visit</div><h1>Your first Sunday at Highfield</h1>
+        <p class="muted">Here is what to expect so you can walk in feeling at home.</p></div>
+      <div class="grid">
+        <div class="card"><div class="eyebrow">Where</div><h3>2407 Egypt, Highfield</h3><p class="muted">Harare. Use the directions link below, or call one of our elders and someone will guide you in.</p></div>
+        <div class="card"><div class="eyebrow">When</div><h3>Sunday, 09:00 to 13:00</h3><p class="muted">Bible study runs from 10:00 to 11:00 as part of the Sunday gathering.</p></div>
+        <div class="card"><div class="eyebrow">What happens</div><h3>Worship, the Word, prayer</h3><p class="muted">Lively Pentecostal praise and worship, a message from the Bible, and time for prayer. Ushers will help you find a seat.</p></div>
+      </div>
+      <div class="row" style="margin-top:22px">
+        <a class="btn btn-flame" href="https://www.google.com/maps/search/?api=1&query=2407+Egypt+Highfield+Harare+Zimbabwe" target="_blank" rel="noopener">Get directions</a>
+      </div>
+      <div class="feature" style="margin-top:28px"><img src="images/sunday-service.jpg" alt="Members seated during a Sunday service at Highfield Assembly" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="band band-alt">
+    <div class="wrap grid" style="align-items:start">
+      <div>
+        <div class="head"><div class="eyebrow">Questions visitors ask</div><h2>Good to know</h2></div>
+        <details><summary>What should I wear?</summary><p class="muted">Come as you are. Many members dress smartly for Sunday, but nobody will turn you away for what you wear.</p></details>
+        <details><summary>Is there something for my children?</summary><p class="muted">Yes. Our Children's Ministry teaches kids about Jesus in a way they enjoy. Ask an usher when you arrive.</p></details>
+        <details><summary>Where do I park?</summary><p class="muted">Parking details will be added here. For now, ask Deacon Prosper on 0784 584 001.</p></details>
+        <details><summary>Will I be asked to give money?</summary><p class="muted">No. Giving is for members who choose to support the church. As a guest, simply enjoy the service.</p></details>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Connection card</div>
+        <h3>Let us know you visited</h3>
+        <p class="muted" id="connectHint">Fill this in and it opens WhatsApp with your details ready to send to Elder Dabga.</p>
+        <form id="connectForm">
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label for="cName">Full name<input id="cName" required autocomplete="name"></label>
+          <div class="two">
+            <label for="cPhone">Phone / WhatsApp<input id="cPhone" type="tel" autocomplete="tel"></label>
+            <label for="cArea">Area you live in<input id="cArea" placeholder="e.g. Egypt, Highfield"></label>
+          </div>
+          <label for="cHow">How can we help?
+            <select id="cHow"><option>I'm visiting for the first time</option><option>I'd like to join a cell group</option><option>I'd like to become a member</option><option>I'd like someone to pray with me</option></select>
+          </label>
+          <button class="btn btn-wa" type="submit">Send on WhatsApp</button>
+          <p class="status" id="connectStatus" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="page" data-page="about" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">About us</div><h1>Pentecostal Assemblies of Zimbabwe, Highfield Assembly</h1>
+        <p class="muted">We are one of the PAOZ family of churches, alongside sister assemblies such as Jubilee Christian Center in Milton Park and Hope Community Church.</p></div>
+      <div class="grid">
+        <div class="card"><div class="eyebrow">Our vision</div><h3>To know Christ, make Him known, and change the world.</h3></div>
+        <div class="card"><div class="eyebrow">Our mission</div><h3>We are a Bible-based Pentecostal church passionately fulfilling the Great Commission and engaged in social transformation.</h3></div>
+        <div class="card"><div class="eyebrow">Our focus</div><h3>Igniting the local church for community transformation in Highfield.</h3></div>
+      </div>
+      <div class="values-wrap">
+        <div>
+          <div class="eyebrow">What we live by</div>
+          <h2 style="margin:6px 0 20px">Our core values</h2>
+          <ul class="values">
+            <li>People</li><li>Integrity</li><li>Fellowship</li><li>Excellence</li>
+            <li>Discipleship</li><li>Accountability</li><li>Sound Doctrine</li><li>Our Pentecostal Heritage</li>
+          </ul>
+        </div>
+        <figure class="banner-photo"><img src="images/paoz-banner.jpg" alt="PAOZ banner showing the vision, mission and core values of the Pentecostal Assemblies of Zimbabwe" loading="lazy"></figure>
+      </div>
+      <div class="feature" style="margin-top:32px"><img src="images/congregation.jpg" alt="The Highfield Assembly congregation gathered for worship" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Our history</div><h2>Where we come from</h2>
+        <p class="muted">Photos from the early years of Highfield Assembly. The same family, still growing in faith together.</p></div>
+      <div class="history-grid">
+        <figure class="shot"><button type="button" data-photo-src="images/history-1.jpg" data-photo-cap="From our early years"><img src="images/history-1.jpg" alt="Early Highfield Assembly members gathered outdoors around a drum kit" loading="lazy"></button><figcaption>From our early years</figcaption></figure>
+        <figure class="shot"><button type="button" data-photo-src="images/history-2.jpg" data-photo-cap="The church family in the early days"><img src="images/history-2.jpg" alt="Early Highfield Assembly congregation, adults and children, gathered under a tent" loading="lazy"></button><figcaption>The church family in the early days</figcaption></figure>
+      </div>
+      <div class="todo" style="margin-top:20px"><b>To add:</b> a few sentences on how Highfield Assembly started: the year, who led it, and where the church first met.</div>
+    </div>
+  </section>
+
+  <section class="band band-alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">What we believe</div><h2>Statement of faith</h2></div>
+      <div class="grid">
+        <div class="card"><h3>The Bible</h3><p class="muted">The Bible is the inspired Word of God and our final authority for faith and life.</p></div>
+        <div class="card"><h3>Salvation</h3><p class="muted">Salvation is by grace through faith in Jesus Christ, who died and rose again.</p></div>
+        <div class="card"><h3>The Holy Spirit</h3><p class="muted">We believe in the baptism of the Holy Spirit and the gifts of the Spirit for the church today.</p></div>
+        <div class="card"><h3>The Church</h3><p class="muted">The church is called to worship, make disciples, and serve the community.</p></div>
+      </div>
+      <p class="note" style="margin-top:12px">Replace with the official PAOZ statement of faith when available.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="lead-head">
+        <div class="eyebrow">Leadership</div>
+        <h2>Our Leadership</h2>
+        <p class="muted">Meet the team serving the PAOZ Highfield Assembly family.</p>
+      </div>
+      <h3 class="lead-sub">Senior Leadership</h3>
+      <div class="senior-grid" id="leadersSenior"></div>
+      <h3 class="lead-sub">Elders and Deacons</h3>
+      <div class="ed-grid" id="leadersED"></div>
+      <figure class="shot" style="margin:48px auto 0;max-width:900px"><div class="feature"><img src="images/leadership.jpg" alt="Highfield Assembly leaders standing together at the front of the church" loading="lazy"></div><figcaption>Some of the leadership of Highfield Assembly</figcaption></figure>
+    </div>
+  </section>
+</div>
+
+<!-- SERMONS -->
+<div class="page" data-page="sermons" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Sermons and media</div><h1>Watch and listen</h1>
+        <p class="muted">Sunday services and messages are shared on our Facebook page. Find recent sermons below.</p></div>
+      <div class="row" style="margin-bottom:22px">
+        <label for="sFilter" style="flex:1;min-width:220px">Search sermons<input id="sFilter" placeholder="Speaker, series, or scripture"></label>
+      </div>
+      <div class="grid" id="sermonList"></div>
+      <p class="note" id="sermonEmpty" hidden style="margin-top:12px">No sermons match that search.</p>
+      <div class="row" style="margin-top:24px">
+        <a class="btn btn-flame" href="https://www.facebook.com/share/1J8MhRu3iD/" target="_blank" rel="noopener">Watch on Facebook</a>
+      </div>
+      <p class="note" id="sermonExampleNote" style="margin-top:12px">The cards above are examples. The media team replaces them with each Sunday's message.</p>
+    </div>
+  </section>
+</div>
+
+<!-- EVENTS -->
+<div class="page" data-page="events" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Events</div><h1>What's on at Highfield</h1></div>
+      <div class="week" id="weekList2"></div>
+    </div>
+  </section>
+  <section class="band band-alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Coming up</div><h2>Special events</h2></div>
+      <div class="grid" id="eventList"></div>
+      <p class="note" style="margin-top:12px">Past events hide automatically once their date has passed.</p>
+    </div>
+  </section>
+</div>
+
+<!-- MINISTRIES -->
+<div class="page" data-page="ministries" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Ministries</div><h1>Find your place</h1>
+        <p class="muted">There is a ministry for every age and stage at Highfield Assembly.</p></div>
+      <div class="grid" id="ministryList"></div>
+    </div>
+  </section>
+  <section class="band band-alt">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Serve with us</div><h2>Serving departments</h2>
+        <p class="muted">Every Sunday runs on volunteers. Find a team where your gifts fit.</p></div>
+      <div class="depts" id="deptsMin"></div>
+    </div>
+  </section>
+</div>
+
+<!-- GALLERY -->
+<div class="page" data-page="gallery" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Gallery</div><h1>Highfield Assembly in pictures</h1>
+        <p class="muted">Moments from our services, youth and ministries. Tap a photo to see it larger.</p></div>
+      <div class="chips" id="galleryChips" role="group" aria-label="Filter photos"></div>
+      <div class="gallery" id="galleryGrid"></div>
+      <div class="row" style="margin-top:28px">
+        <a class="btn btn-flame" href="https://www.facebook.com/people/PAOZ-Highfield-Assembly/61561261124724/?sk=photos" target="_blank" rel="noopener">More photos on Facebook</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GIVE -->
+<div class="page" data-page="give" hidden>
+  <section class="band">
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Give</div><h1>Tithes and offerings</h1>
+        <p class="muted">"Each of you should give what you have decided in your heart to give." 2 Corinthians 9:7</p></div>
+      <div class="grid">
+        <div class="card"><div class="eyebrow">In person</div><h3>During the Sunday service</h3><p class="muted">Give your tithe or offering during the service. Ushers can give you an envelope.</p></div>
+        <div class="card"><div class="eyebrow">Mobile money</div><h3>EcoCash</h3><p class="muted">EcoCash merchant details will be added here once confirmed by the elders.</p></div>
+        <div class="card"><div class="eyebrow">Bank transfer</div><h3>TN CyberTech Bank</h3><p class="note" style="margin-top:-2px">Formerly Steward Bank</p>
+          <div class="bank">
+            <div><span>Account name</span><b>PAOZ Highfield Assembly</b></div>
+            <div class="acct"><span>USD · NPO Nostro FCA</span><div><b class="phone">1043088625</b> <button class="copy" type="button" data-copy="1043088625">Copy</button></div></div>
+            <div class="acct"><span>ZiG · Non Profit Current Account</span><div><b class="phone">1040785414</b> <button class="copy" type="button" data-copy="1040785414">Copy</button></div></div>
+            <div><span>Reference</span><b>Your name + Tithe or Offering</b></div>
+          </div>
+          <p class="note">Pay US dollars into the USD account and ZiG into the ZiG account.</p>
+        </div>
+      </div>
+      <div class="todo" style="margin-top:20px"><b>To add:</b> the EcoCash or Paynow details, and the funds members can give to, such as General, Building and Missions.</div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="page" data-page="contact" hidden>
+  <section class="band">
+    <div class="wrap grid" style="align-items:start">
+      <div style="display:grid;gap:18px">
+        <div class="head" style="margin:0"><div class="eyebrow">Contact</div><h1>Get in touch</h1></div>
+        <div class="card">
+          <h3>Visit us</h3>
+          <p>2407 Egypt, Highfield, Harare, Zimbabwe</p>
+          <a href="https://www.google.com/maps/search/?api=1&query=2407+Egypt+Highfield+Harare+Zimbabwe" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+        <div class="card" id="contactPeople"><h3>Call or WhatsApp</h3></div>
+        <div class="card"><h3>Facebook</h3><p>PAOZ Highfield Assembly</p><a href="https://www.facebook.com/share/1J8MhRu3iD/" target="_blank" rel="noopener">Open PAOZ Highfield Assembly on Facebook</a></div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Prayer requests</div>
+        <h3>How can we pray for you?</h3>
+        <form id="prayerForm">
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label for="pName">Your name<input id="pName" autocomplete="name" placeholder="You can leave this blank"></label>
+          <label for="pText">Prayer request<textarea id="pText" required></textarea></label>
+          <fieldset style="border:0;padding:0;margin:0;display:grid;gap:6px">
+            <legend style="font-weight:600;font-size:.92rem;padding:0;margin-bottom:6px">Who may see this?</legend>
+            <div class="radio">
+              <label><input type="radio" name="pScope" id="pPrivate" value="Private" checked> Elders only (private)</label>
+              <label><input type="radio" name="pScope" id="pShare" value="Can be shared" > The church can pray with me</label>
+            </div>
+          </fieldset>
+          <label for="pTo">Send to
+            <select id="pTo"></select>
+          </label>
+          <button class="btn btn-wa" type="submit">Send on WhatsApp</button>
+          <p class="status" id="prayerStatus" hidden></p>
+          <p class="note" id="prayerHint">This opens WhatsApp with your request written out. Nothing is sent until you press send in WhatsApp.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<dialog class="lb" id="lightbox" aria-label="Photo viewer">
+  <button class="x" type="button" id="lbClose">Close</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</dialog>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div style="display:grid;gap:8px">
+        <div class="brand"><img class="mark" src="images/paoz-logo.png" alt="PAOZ logo"><span><b>Highfield Assembly</b><small>Pentecostal Assemblies of Zimbabwe</small></span></div>
+        <p style="opacity:.85">2407 Egypt, Highfield, Harare</p>
+      </div>
+      <div style="display:grid;gap:4px">
+        <strong>Sundays</strong><span style="opacity:.85">Main service 09:00 to 13:00</span><span style="opacity:.85">Bible study 10:00 to 11:00</span>
+      </div>
+      <div style="display:grid;gap:4px">
+        <strong>Contact</strong>
+        <span style="opacity:.85">Elder Dabga: 0777 535 748</span>
+        <span style="opacity:.85">Elder Mupingo Jnr: 0773 986 851</span>
+        <span style="opacity:.85">Deacon Prosper: 0784 584 001</span>
+      </div>
+    </div>
+    <div class="fine">© <span id="yr">2026</span> PAOZ Highfield Assembly. Part of the Pentecostal Assemblies of Zimbabwe.</div>
+  </div>
+</footer>
+
+<script src="js/cms-config.js"></script>
+<script src="js/site-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/cms-public.js" defer></script>
+
+<script>
+(function(){
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
+  const ss = x => { x = clamp(x); return x*x*(3-2*x); };
+  const hex = h => [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+  const mix = (a,b,t) => [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t, a[2]+(b[2]-a[2])*t];
+  const CORE=hex("#8fd9a6"), RIM=hex("#e0f4d8"), OUT=[255,255,255];
+  const INK=hex("#0b2a1a"), HL=hex("#0a8f45"), ACC=hex("#13a957"), WHITE=[255,255,255];
+  const D_GHOST=hex("#4f7a61"), D_ACC=hex("#f5d313");
+
+  // ---- letter splitting ----
+  function splitChars(el){
+    const out=[]; const src=[...el.childNodes]; el.textContent="";
+    function addText(text, flag, target){
+      text.split(/(\s+)/).forEach(part => {
+        if(!part) return;
+        if(/^\s+$/.test(part)){ target.appendChild(document.createTextNode(" ")); return; }
+        const w=document.createElement("span"); w.style.display="inline-block"; w.style.whiteSpace="nowrap";
+        for(const ch of part){ const c=document.createElement("span"); c.textContent=ch; w.appendChild(c); out.push({el:c,flag}); }
+        target.appendChild(w);
+      });
+    }
+    src.forEach(n => {
+      if(n.nodeType===3) addText(n.textContent,false,el);
+      else if(n.nodeName==="BR") el.appendChild(document.createElement("br"));
+      else addText(n.textContent, n.classList && n.classList.contains("hl"), el);
+    });
+    el.setAttribute("aria-label", src.map(n=>n.textContent||" ").join("").replace(/\s+/g," ").trim());
+    return out;
+  }
+  function paint(chars, p, spread, fin, acc, ghost, flagFin, last){
+    if(last.p===p) return; last.p=p;
+    const n=chars.length;
+    chars.forEach((c,i) => {
+      const t = clamp((p*(1+spread) - i/n)/spread);
+      let o, col, b;
+      if(t<=.35){ const k=t/.35; o=k; col=ghost; b=8-6.5*k; }
+      else if(t<=.70){ const k=(t-.35)/.35; o=1; col=mix(ghost,acc,k); b=1.5*(1-k); }
+      else { const k=(t-.70)/.30; o=1; col=mix(acc, c.flag?flagFin:fin, k); b=0; }
+      c.el.style.color=`rgba(${col[0]|0},${col[1]|0},${col[2]|0},${o.toFixed(3)})`;
+      c.el.style.filter = b>0.05 ? `blur(${b.toFixed(2)}px)` : "none";
+    });
+  }
+  const h1c=splitChars(document.getElementById("h1")), stc=splitChars(document.getElementById("stmt")), h2c=splitChars(document.getElementById("h2"));
+  const L1={},L2={},L3={};
+  paint(h1c,0,.35,INK,ACC,WHITE,HL,L1); paint(stc,0,.16,INK,ACC,WHITE,HL,L2); paint(h2c,0,.35,WHITE,D_ACC,D_GHOST,WHITE,L3);
+
+  // ---- bowl glow ----
+  const KQ=[0,.03,.08,.18,.40,.66,.87,1.15,1.43,1.8];
+  const KT=[.30,.45,.65,.80,.95,1.05,1.05,1.10,1.30,2.40];
+  const KH=[.34,.38,.38,.38,.38,.46,.66,.90,1.60,3.00];
+  const KS=[.22,.26,.22,.22,.19,.16,.13,.10,.10,.10];
+  const lerpKeys=(K,q)=>{ if(q<=KQ[0]) return K[0]; for(let i=1;i<KQ.length;i++){ if(q<=KQ[i]){ const t=(q-KQ[i-1])/(KQ[i]-KQ[i-1]); return K[i-1]+(K[i]-K[i-1])*t; } } return K[K.length-1]; };
+  const cv=document.getElementById("bg"), cx=cv.getContext("2d"), W=96, H=60, img=cx.createImageData(W,H);
+  const START={tip:-.3,half:.3,soft:.1};
+  let cur={...START}, tgt={tip:.30,half:.34,soft:.22}, introStart=null, introDone=reduced;
+  if(reduced) cur={...tgt};
+  const RND=.25, NPT=48, px=new Float32Array(NPT), py=new Float32Array(NPT);
+  function draw(t){
+    let tip=cur.tip, half=cur.half; const soft=Math.max(.02,cur.soft);
+    if(!reduced){ tip+=Math.sin(t*.00033+1.3)*.02; half+=Math.sin(t*.0005)*.015; }
+    const asp=innerWidth/Math.max(1,innerHeight), d=img.data;
+    if(tip<=.01){ for(let i=0;i<d.length;i+=4){d[i]=d[i+1]=d[i+2]=255;d[i+3]=255;} cx.putImageData(img,0,0); return; }
+    const HW=half*asp;
+    for(let k=0;k<NPT;k++){ const yy=-.3+(tip+.3)*k/(NPT-1); py[k]=yy; px[k]=HW*Math.pow(Math.max(0,1-yy/tip),.72); }
+    let o=0;
+    for(let j=0;j<H;j++){
+      const y=(j+.5)/H;
+      for(let i=0;i<W;i++){
+        const x=Math.abs((i+.5)/W-.5)*asp;
+        let best=1e9;
+        for(let k=0;k<NPT-1;k++){
+          const ax=px[k],ay=py[k],bx=px[k+1],by=py[k+1],vx=bx-ax,vy=by-ay;
+          const L=vx*vx+vy*vy; let u=L>0?((x-ax)*vx+(y-ay)*vy)/L:0; u=u<0?0:u>1?1:u;
+          const dx=x-(ax+vx*u), dy=y-(ay+vy*u), dd=dx*dx+dy*dy; if(dd<best) best=dd;
+        }
+        let sd=Math.sqrt(best);
+        const inside = y<tip && x < HW*Math.pow(1-y/tip,.72);
+        if(inside) sd=-sd;
+        sd-=RND;
+        const g=1-ss((sd+soft)/(2*soft));
+        const c = g<.38 ? mix(OUT,RIM,ss(g/.38)) : mix(RIM,CORE,ss((g-.38)/.62));
+        d[o]=c[0]; d[o+1]=c[1]; d[o+2]=c[2]; d[o+3]=255; o+=4;
+      }
+    }
+    cx.putImageData(img,0,0);
+  }
+
+  // ---- scroll ----
+  const nav=document.getElementById("nav"), stmt=document.getElementById("stmt"), stSec=document.getElementById("statement"),
+        split=document.getElementById("split"), row=document.getElementById("row"), ship=document.getElementById("ship"), atmo=document.querySelector(".atmo");
+  const isHome = () => !document.querySelector('.page[data-page="home"]').hidden;
+  function onScroll(){
+    const vh=innerHeight;
+    if(!isHome()){
+      tgt={tip:.30,half:.34,soft:.22};
+      atmo.style.opacity = clamp(1 - scrollY/(vh*.6)).toFixed(3);
+      nav.classList.add("on");
+      return;
+    }
+    atmo.style.opacity = "1";
+    // q measured so that the statement's position matches the original timeline on any hero height
+    const q = -stSec.getBoundingClientRect().top/vh + .69;
+    tgt={tip:lerpKeys(KT,q), half:lerpKeys(KH,q), soft:lerpKeys(KS,q)};
+    const s=clamp((q-.69)/.74);
+    stmt.style.transform=`translateY(${(.205*(1-s)*(1-s)*vh).toFixed(1)}px)`;
+    const p=clamp((q-.56)/2.03);
+    paint(stc,+p.toFixed(4),.16,INK,ACC,WHITE,HL,L2);
+    nav.classList.toggle("on", p>.4);
+    const st=split.getBoundingClientRect().top/vh;
+    const p2=clamp((.8-st)/.65);
+    paint(h2c,+p2.toFixed(4),.35,WHITE,D_ACC,D_GHOST,WHITE,L3);
+    row.classList.toggle("on", p2>.92);
+    ship.style.transform=`scale(${(1.08-.08*clamp(1-st)).toFixed(4)})`;
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll);
+  addEventListener("hashchange", () => requestAnimationFrame(onScroll));
+
+  // ---- loop ----
+  let t0=null;
+  function frame(t){
+    if(t0===null) t0=t;
+    const el=t-t0;
+    if(!introDone){
+      const k=ss((el-250)/1050);
+      cur={tip:START.tip+(tgt.tip-START.tip)*k, half:START.half+(tgt.half-START.half)*k, soft:START.soft+(tgt.soft-START.soft)*k};
+      if(el>1300) introDone=true;
+    } else {
+      cur.tip+=(tgt.tip-cur.tip)*.12; cur.half+=(tgt.half-cur.half)*.12; cur.soft+=(tgt.soft-cur.soft)*.12;
+    }
+    if(el<1400 && !reduced) paint(h1c, clamp(el/1250), .35, INK, ACC, WHITE, HL, L1);
+    draw(t);
+    requestAnimationFrame(frame);
+  }
+  if(reduced) paint(h1c,1,.35,INK,ACC,WHITE,HL,L1);
+  requestAnimationFrame(t => { document.body.classList.add("ready"); onScroll(); frame(t); });
+})();
+</script>
+
+</body>
+</html>

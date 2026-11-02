@@ -1,0 +1,106 @@
+rules_version = '2';
+
+// PAOZ Highfield Assembly: who can read and change what.
+// Admins are documents in /admins/{email} with a field roles: ["super" | "media" | "events" | "pastoral", ...]
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+    function adminPath() {
+      return /databases/$(database)/documents/admins/$(request.auth.token.email.lower());
+    }
+    function hasRole(r) {
+      return signedIn() && exists(adminPath()) && get(adminPath()).data.roles.hasAny([r, 'super']);
+    }
+    function str(v, max) {
+      return v is string && v.size() <= max;
+    }
+    function optStr(d, k, max) {
+      return !(k in d) || str(d[k], max);
+    }
+    function recent(t) {
+      return t is timestamp
+        && t > request.time - duration.value(15, 'm')
+        && t < request.time + duration.value(15, 'm');
+    }
+
+    // Media team and events team can upload photos (flyers, covers, gallery).
+    function uploader() {
+      return hasRole('media') || hasRole('events');
+    }
+    function validMedia() {
+      return request.resource.data.keys().hasOnly(['data', 'createdAt'])
+        && request.resource.data.data is string
+        && request.resource.data.data.size() < 1000000;
+    }
+
+    // ---- Public content: anyone can read, only the right team can change ----
+    match /sermons/{id} {
+      allow read: if true;
+      allow create, update, delete: if hasRole('media');
+    }
+    match /photos/{id} {
+      allow read: if true;
+      allow create, update, delete: if hasRole('media');
+    }
+    match /events/{id} {
+      allow read: if true;
+      allow create, update, delete: if hasRole('events');
+    }
+    match /leaders/{id} {
+      allow read: if true;
+      allow create, update, delete: if hasRole('super');
+    }
+    match /departments/{id} {
+      allow read: if true;
+      allow create, update, delete: if hasRole('media');
+    }
+
+    // ---- Uploaded photos (small and large copies), stored as image data ----
+    match /media/{id} {
+      allow read: if true;
+      allow create, update: if uploader() && validMedia();
+      allow delete: if uploader();
+    }
+    match /mediaFull/{id} {
+      allow read: if true;
+      allow create, update: if uploader() && validMedia();
+      allow delete: if uploader();
+    }
+
+    // ---- Website forms: anyone can send, only the pastoral team can read ----
+    match /prayerRequests/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'text', 'scope', 'to', 'status', 'createdAt'])
+        && str(request.resource.data.text, 3000) && request.resource.data.text.size() >= 3
+        && optStr(request.resource.data, 'name', 120)
+        && optStr(request.resource.data, 'to', 120)
+        && request.resource.data.scope in ['Private', 'Can be shared']
+        && request.resource.data.status == 'new'
+        && recent(request.resource.data.createdAt);
+      allow read, update, delete: if hasRole('pastoral');
+    }
+    match /connections/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'phone', 'area', 'request', 'status', 'createdAt'])
+        && str(request.resource.data.name, 120) && request.resource.data.name.size() >= 2
+        && optStr(request.resource.data, 'phone', 40)
+        && optStr(request.resource.data, 'area', 120)
+        && optStr(request.resource.data, 'request', 200)
+        && request.resource.data.status == 'new'
+        && recent(request.resource.data.createdAt);
+      allow read, update, delete: if hasRole('pastoral');
+    }
+
+    // ---- Admin list: you can see your own entry; only the webmaster manages it ----
+    match /admins/{email} {
+      allow read: if signedIn() && (request.auth.token.email.lower() == email || hasRole('super'));
+      allow create, update, delete: if hasRole('super');
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
